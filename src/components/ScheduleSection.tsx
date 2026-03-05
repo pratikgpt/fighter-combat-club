@@ -114,7 +114,7 @@ const ScheduleSection = () => {
                   <p className="font-heading text-base font-bold uppercase text-foreground">
                     Sunday
                   </p>
-                  <p className="text-sm text-[#888888]">10:00 AM to 12:30 PM</p>
+                  <p className="text-sm text-[#888888]">Closed</p>
                 </div>
               </div>
             </motion.div>
