@@ -1,8 +1,22 @@
 import { useState } from "react";
-import { MapPin, Phone, Facebook, ArrowRight } from "lucide-react";
+import { MapPin, Phone, Facebook, ArrowRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
 
-const programs = ["Mixed Martial Arts", "Brazilian Jiu-Jitsu", "Kickboxing & Muay Thai", "Kids Martial Arts"];
+/* WhatsApp icon as inline SVG — not available in lucide */
+const WhatsAppIcon = ({ size = 16 }: { size?: number }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden
+  >
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+  </svg>
+);
+
+const programs = ["MMA Fighter Development", "Kids Martial Arts"];
 
 const ContactFooter = () => {
   const [formData, setFormData] = useState({ name: "", phone: "", program: "" });
@@ -14,106 +28,156 @@ const ContactFooter = () => {
   };
 
   return (
-    <section id="contact" className="border-t border-border py-24">
+    <section id="contact" className="border-t border-[#1F1F1F] py-20">
       <div className="container grid gap-16 lg:grid-cols-2">
-        {/* Contact Form */}
+
+        {/* ── Left: Lead capture form ─────────────────────────────── */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-heading text-4xl font-bold uppercase tracking-tighter text-foreground md:text-5xl">
-            Start Your <span className="text-gradient-crimson">Journey</span>
+          <span className="inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 font-body text-xs uppercase tracking-widest text-primary">
+            Free Trial Class
+          </span>
+
+          <h2
+            className="mt-6 font-heading font-bold uppercase leading-[0.9] tracking-tighter text-foreground"
+            style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
+          >
+            Start Your{" "}
+            <span className="text-gradient-crimson">Journey.</span>
           </h2>
-          <p className="mt-4 text-muted-foreground">
-            Fill in your details and we'll get you on the mat.
+
+          <p className="mt-4 text-[#888888]">
+            Fill in your details. We'll call you within 24 hours to get you on the mat.
           </p>
 
+          {/* Google rating trust signal */}
+          <div className="mt-5 flex items-center gap-2.5">
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={13} className="fill-primary text-primary" />
+              ))}
+            </div>
+            <p className="text-xs text-[#666666]">
+              <span className="font-medium text-foreground">4.9 / 5</span> on Google
+              &nbsp;·&nbsp; 500+ members trust us
+            </p>
+          </div>
+
           {submitted ? (
-            <div className="mt-8 rounded-lg border border-primary/30 bg-primary/10 p-8 text-center">
-              <p className="font-heading text-xl font-semibold uppercase text-foreground">
-                We'll be in touch!
+            <div className="mt-10 rounded-[8px] border border-primary/20 bg-primary/5 p-8 text-center">
+              <p className="font-heading text-2xl font-bold uppercase text-foreground">
+                You're in!
               </p>
-              <p className="mt-2 text-muted-foreground">
-                Our team will contact you shortly.
+              <p className="mt-2 text-sm text-[#888888]">
+                Expect a call from us within 24 hours. Welcome to Fighter Combat Club.
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-              <input
-                type="text"
-                placeholder="Your Name"
-                required
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full rounded-md border border-border bg-card px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-              />
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                required
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full rounded-md border border-border bg-card px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-              />
-              <select
-                required
-                value={formData.program}
-                onChange={(e) => setFormData({ ...formData, program: e.target.value })}
-                className="w-full rounded-md border border-border bg-card px-4 py-3 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-              >
-                <option value="" disabled>
-                  Program of Interest
-                </option>
-                {programs.map((p) => (
-                  <option key={p} value={p}>
-                    {p}
-                  </option>
-                ))}
-              </select>
-              <button
-                type="submit"
-                className="w-full rounded-md bg-primary px-8 py-4 font-heading text-sm font-semibold uppercase tracking-wider text-primary-foreground transition-all hover:brightness-110 animate-pulse-glow"
-              >
-                Claim Free Trial
-              </button>
-            </form>
+            <>
+              <form onSubmit={handleSubmit} className="mt-8 space-y-3">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full rounded-[6px] border border-[#1F1F1F] bg-[#111111] px-4 py-3.5 text-foreground placeholder:text-[#3A3A3A] transition-colors focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/20"
+                />
+                <input
+                  type="tel"
+                  placeholder="Phone Number"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full rounded-[6px] border border-[#1F1F1F] bg-[#111111] px-4 py-3.5 text-foreground placeholder:text-[#3A3A3A] transition-colors focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/20"
+                />
+                <select
+                  required
+                  value={formData.program}
+                  onChange={(e) => setFormData({ ...formData, program: e.target.value })}
+                  className="w-full rounded-[6px] border border-[#1F1F1F] bg-[#111111] px-4 py-3.5 text-foreground focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/20"
+                >
+                  <option value="" disabled>Select a Program</option>
+                  {programs.map((p) => (
+                    <option key={p} value={p}>{p}</option>
+                  ))}
+                </select>
+
+                <button
+                  type="submit"
+                  className="animate-pulse-glow w-full rounded-[4px] bg-primary py-4 font-heading text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-primary/85"
+                >
+                  Claim Free Trial
+                </button>
+
+                {/* Friction-reducing micro-copy */}
+                <p className="text-center text-xs text-[#3A3A3A]">
+                  No commitment. No spam. We'll call you within 24 hours.
+                </p>
+              </form>
+
+              {/* WhatsApp alternative — primary conversion channel in Mumbai */}
+              <div className="mt-5">
+                <p className="mb-3 text-center text-xs text-[#3A3A3A]">
+                  Or reach us directly on WhatsApp
+                </p>
+                <a
+                  href="https://wa.me/919619439394"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-2.5 rounded-[4px] border border-[#1F1F1F] bg-[#111111] py-3.5 font-heading text-sm uppercase tracking-widest text-foreground transition-all hover:border-[#25D366]/30 hover:bg-[#25D366]/5 hover:text-[#25D366]"
+                >
+                  <WhatsAppIcon size={16} />
+                  Message on WhatsApp
+                </a>
+              </div>
+            </>
           )}
         </motion.div>
 
-        {/* Location */}
+        {/* ── Right: Location info + map ──────────────────────────── */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
         >
           <h3 className="font-heading text-2xl font-bold uppercase tracking-tight text-foreground">
             Find Us
           </h3>
 
           <div className="mt-6 space-y-4">
+            <a
+              href="tel:+919619439394"
+              className="group flex items-center gap-3 text-foreground transition-colors hover:text-primary"
+            >
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[6px] border border-[#1F1F1F] bg-[#111111] transition-colors group-hover:border-primary/30">
+                <Phone size={14} className="text-primary" />
+              </div>
+              <span className="text-sm">+91 96194 39394</span>
+            </a>
+
             <div className="flex items-start gap-3">
-              <Phone size={18} className="mt-1 shrink-0 text-primary" />
-              <a href="tel:+919619439394" className="text-foreground hover:text-primary transition-colors">
-                +91 96194 39394
-              </a>
-            </div>
-            <div className="flex items-start gap-3">
-              <MapPin size={18} className="mt-1 shrink-0 text-primary" />
-              <p className="text-muted-foreground">
-                Ground floor, Kishkant CHS, Datta Mandir Rd, Kandivali West, Mumbai
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[6px] border border-[#1F1F1F] bg-[#111111]">
+                <MapPin size={14} className="text-primary" />
+              </div>
+              <p className="text-sm leading-relaxed text-[#888888]">
+                Ground floor, Kishkant CHS, Datta Mandir Rd,<br />
+                Kandivali West, Mumbai
               </p>
             </div>
           </div>
 
-          {/* Map placeholder */}
-          <div className="mt-6 overflow-hidden rounded-lg border border-border bg-card">
+          {/* Map — dark-filtered for visual consistency */}
+          <div className="mt-6 overflow-hidden rounded-[8px] border border-[#1F1F1F]">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.0!2d72.84!3d19.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDEyJzAwLjAiTiA3MsKwNTAnMjQuMCJF!5e0!3m2!1sen!2sin!4v1"
               width="100%"
-              height="250"
+              height="220"
               style={{ border: 0, filter: "invert(90%) hue-rotate(180deg)" }}
               allowFullScreen
               loading="lazy"
@@ -122,32 +186,33 @@ const ContactFooter = () => {
             />
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-4">
+          <div className="mt-6 flex flex-wrap gap-3">
             <a
               href="https://share.google/2QFXU8NqZ1dvlBKts"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 font-heading text-sm font-semibold uppercase tracking-wider text-primary-foreground transition-all hover:brightness-110"
+              className="inline-flex items-center gap-2 rounded-[4px] bg-primary px-5 py-3 font-heading text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-primary/85"
             >
-              Get Directions <ArrowRight size={16} />
+              Get Directions <ArrowRight size={14} />
             </a>
             <a
               href="https://www.facebook.com/fighter.combat.club/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md border border-border px-6 py-3 font-heading text-sm uppercase tracking-wider text-foreground transition-all hover:bg-secondary"
+              className="inline-flex items-center gap-2 rounded-[4px] border border-[#1F1F1F] px-5 py-3 font-heading text-sm uppercase tracking-widest text-foreground transition-all hover:bg-[#181818]"
             >
-              <Facebook size={18} /> Facebook
+              <Facebook size={15} /> Facebook
             </a>
           </div>
 
-          {/* Footer */}
-          <div className="mt-16 border-t border-border pt-8">
-            <p className="text-sm text-muted-foreground">
+          {/* Footer line */}
+          <div className="mt-16 border-t border-[#1F1F1F] pt-8">
+            <p className="text-xs text-[#333333]">
               © {new Date().getFullYear()} Fighter Combat Club. All rights reserved.
             </p>
           </div>
         </motion.div>
+
       </div>
     </section>
   );

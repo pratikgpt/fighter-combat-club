@@ -6,35 +6,38 @@
 
 @layer base {
   :root {
-    --background: 0 0% 3%;
-    --foreground: 0 0% 95%;
+    /* Core backgrounds */
+    --background: 0 0% 3.1%;        /* #080808 */
+    --foreground: 0 0% 94%;         /* #F0F0F0 */
 
-    --card: 0 0% 6%;
-    --card-foreground: 0 0% 95%;
+    --card: 0 0% 6.7%;              /* #111111 */
+    --card-foreground: 0 0% 94%;
 
-    --popover: 0 0% 6%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 0 0% 6.7%;
+    --popover-foreground: 0 0% 94%;
 
-    --primary: 0 72% 51%;
+    /* Crimson — slightly deeper and more saturated than before */
+    --primary: 350 86% 42%;         /* #C8102E */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 0 0% 9.4%;        /* #181818 */
+    --secondary-foreground: 0 0% 94%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 64%;
+    --muted: 0 0% 9.4%;
+    --muted-foreground: 0 0% 40%;   /* #666666 */
 
-    --accent: 0 0% 12%;
-    --accent-foreground: 0 0% 95%;
+    --accent: 0 0% 10.6%;          /* #1B1B1B */
+    --accent-foreground: 0 0% 94%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 0 72% 51%;
+    --border: 0 0% 12.2%;          /* #1F1F1F */
+    --input: 0 0% 12.2%;
+    --ring: 350 86% 42%;
 
-    --radius: 0.5rem;
+    /* Sharper radius — MMA is not a wellness app */
+    --radius: 0.375rem;             /* 6px */
 
     --font-heading: 'Oswald', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -57,27 +60,64 @@
 }
 
 @layer utilities {
+  /* Crimson gradient text */
   .text-gradient-crimson {
-    background-image: linear-gradient(135deg, hsl(0 72% 51%), hsl(15 90% 55%));
+    background-image: linear-gradient(135deg, hsl(350 86% 42%), hsl(10 90% 52%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
+  /* Crimson glow — used on featured card only */
   .glow-crimson {
-    box-shadow: 0 0 30px -5px hsl(0 72% 51% / 0.4);
+    box-shadow: 0 0 60px -15px hsl(350 86% 42% / 0.25);
   }
 
+  /* Hover lift — card hover state */
   .hover-lift {
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.7);
   }
 
-  .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 40px -10px hsl(0 72% 51% / 0.2);
+  /* Decorative outline text — used in hero + coach */
+  .text-outline-crimson {
+    -webkit-text-stroke: 1px hsl(350 86% 42% / 0.12);
+    color: transparent;
   }
 }
 
+/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+/* Keyframes */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px -5px hsl(350 86% 42% / 0.4); }
+  50%       { box-shadow: 0 0 35px -5px hsl(350 86% 42% / 0.65); }
+}
+
+@keyframes whatsapp-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.85); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+
+@keyframes bounce-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(7px); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.2s ease-in-out infinite;
+}
+
+.animate-whatsapp-in {
+  animation: whatsapp-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 2s both;
+}
+
+.animate-bounce-y {
+  animation: bounce-y 1.8s ease-in-out infinite;
 }
