@@ -69,7 +69,7 @@ const CoachSection = () => {
 
           <p className="mt-6 text-base leading-relaxed text-[#888888] md:text-lg">
             Deepak Patil founded Fighter Combat Club with one mission - to bring
-            world-class MMA training to everyday people in Kandivali. With years of
+            world-class MMA training to everyday people in Mumbai. With years of
             competitive experience and a deep belief in well-rounded combat education,
             he built a curriculum that rotates through every discipline, so no skill
             gets left behind.
