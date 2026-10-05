@@ -43,8 +43,14 @@ const ContactFooter = () => {
   const [formData, setFormData] = useState({ name: "", phone: "", program: "" });
   const [submitted, setSubmitted] = useState(false);
 
+  /* Free-trial request as a pre-filled WhatsApp message to the gym — the visitor taps send */
+  const trialLink = `https://wa.me/919619439394?text=${encodeURIComponent(
+    `Hi, I'd like to book a free trial class.\nName: ${formData.name}\nPhone: ${formData.phone}\nProgram: ${formData.program}`,
+  )}`;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    window.open(trialLink, "_blank", "noopener,noreferrer");
     setSubmitted(true);
   };
 
@@ -72,7 +78,7 @@ const ContactFooter = () => {
           </h2>
 
           <p className="mt-4 text-[#888888]">
-            Fill in your details. We'll call you within 24 hours to get you on the mat.
+            Fill in your details and send them to us on WhatsApp. We'll call you within 24 hours to get you on the mat.
           </p>
 
           {/* Google rating trust signal */}
@@ -91,11 +97,19 @@ const ContactFooter = () => {
           {submitted ? (
             <div className="mt-10 rounded-[8px] border border-primary/20 bg-primary/5 p-8 text-center">
               <p className="font-heading text-2xl font-bold uppercase text-foreground">
-                You're in!
+                Almost there!
               </p>
               <p className="mt-2 text-sm text-[#888888]">
-                Expect a call from us within 24 hours. Welcome to Fighter Combat Club.
+                Send the message in WhatsApp and we'll call you within 24 hours. Welcome to Fighter Combat Club.
               </p>
+              <a
+                href={trialLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-block font-heading text-xs uppercase tracking-widest text-primary transition-colors hover:text-primary/85"
+              >
+                WhatsApp didn't open? Tap here
+              </a>
             </div>
           ) : (
             <>
@@ -137,7 +151,7 @@ const ContactFooter = () => {
 
                 {/* Friction-reducing micro-copy */}
                 <p className="text-center text-xs text-[#3A3A3A]">
-                  No commitment. No spam. We'll call you within 24 hours.
+                  No commitment. No spam. Opens WhatsApp with your details filled in.
                 </p>
               </form>
 
