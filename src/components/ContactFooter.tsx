@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MapPin, Phone, Facebook, ArrowRight, Star } from "lucide-react";
+import { MapPin, Phone, ArrowRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
 
 /* WhatsApp icon as inline SVG — not available in lucide */
@@ -16,7 +16,28 @@ const WhatsAppIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
+/* Facebook icon as inline SVG — lucide-react no longer ships brand icons */
+const FacebookIcon = ({ size = 16 }: { size?: number }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden
+  >
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
 const programs = ["MMA Fighter Development", "Kids Martial Arts"];
+
+/* Read once when the page loads, so rendering stays pure */
+const year = new Date().getFullYear();
 
 const ContactFooter = () => {
   const [formData, setFormData] = useState({ name: "", phone: "", program: "" });
@@ -201,7 +222,7 @@ const ContactFooter = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-[4px] border border-[#1F1F1F] px-5 py-3 font-heading text-sm uppercase tracking-widest text-foreground transition-all hover:bg-[#181818]"
             >
-              <Facebook size={15} /> Facebook
+              <FacebookIcon size={15} /> Facebook
             </a>
             <a
               href="https://www.instagram.com/fightercombatclub/"
@@ -217,7 +238,7 @@ const ContactFooter = () => {
           {/* Footer line */}
           <div className="mt-16 border-t border-[#1F1F1F] pt-8">
             <p className="text-xs text-[#333333]">
-              © {new Date().getFullYear()} Fighter Combat Club. All rights reserved.
+              © {year} Fighter Combat Club. All rights reserved.
             </p>
           </div>
         </motion.div>
