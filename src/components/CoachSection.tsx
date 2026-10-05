@@ -53,7 +53,7 @@ const CoachSection = () => {
             />
 
             {/* Bottom gradient bar with name — stays even after photo is added */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#080808] to-transparent p-6">
+            <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-[#080808] to-transparent p-6">
               <p className="font-heading text-2xl font-bold uppercase tracking-tight text-foreground">
                 Deepak Patil
               </p>

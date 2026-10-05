@@ -106,7 +106,7 @@ const ContactFooter = () => {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full rounded-[6px] border border-[#1F1F1F] bg-[#111111] px-4 py-3.5 text-foreground placeholder:text-[#3A3A3A] transition-colors focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/20"
+                  className="w-full rounded-[6px] border border-[#1F1F1F] bg-[#111111] px-4 py-3.5 text-foreground placeholder:text-[#3A3A3A] transition-colors focus:border-primary/50 focus:outline-hidden focus:ring-1 focus:ring-primary/20"
                 />
                 <input
                   type="tel"
@@ -114,13 +114,13 @@ const ContactFooter = () => {
                   required
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full rounded-[6px] border border-[#1F1F1F] bg-[#111111] px-4 py-3.5 text-foreground placeholder:text-[#3A3A3A] transition-colors focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/20"
+                  className="w-full rounded-[6px] border border-[#1F1F1F] bg-[#111111] px-4 py-3.5 text-foreground placeholder:text-[#3A3A3A] transition-colors focus:border-primary/50 focus:outline-hidden focus:ring-1 focus:ring-primary/20"
                 />
                 <select
                   required
                   value={formData.program}
                   onChange={(e) => setFormData({ ...formData, program: e.target.value })}
-                  className="w-full rounded-[6px] border border-[#1F1F1F] bg-[#111111] px-4 py-3.5 text-foreground focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/20"
+                  className="w-full rounded-[6px] border border-[#1F1F1F] bg-[#111111] px-4 py-3.5 text-foreground focus:border-primary/50 focus:outline-hidden focus:ring-1 focus:ring-primary/20"
                 >
                   <option value="" disabled>Select a Program</option>
                   {programs.map((p) => (

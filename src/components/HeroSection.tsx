@@ -22,9 +22,9 @@ const HeroSection = () => {
       />
 
       {/* Overlay — stronger on left where text sits, lets gym image breathe on right */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/80 to-[#080808]/25" />
+      <div className="absolute inset-0 bg-linear-to-r from-[#080808] via-[#080808]/80 to-[#080808]/25" />
       {/* Bottom fade — connects cleanly to next section */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/40" />
+      <div className="absolute inset-0 bg-linear-to-t from-[#080808] via-transparent to-[#080808]/40" />
 
       {/* Content — left-anchored, max-width keeps it from sprawling into the image */}
       <div className="container relative z-10 pt-16">
